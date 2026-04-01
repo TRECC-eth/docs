@@ -1,0 +1,110 @@
+---
+title: "TRECVault"
+description: "The central lending pool contract  manages deposits, bonds, loans, and liquidations"
+---
+
+## Overview
+
+`TRECVault` is the heart of the TRECC protocol. It holds all USDC liquidity, tracks operator ETH bonds, and orchestrates the full loan lifecycle. All sensitive operations are `onlyOwner` callable only by the protocol owner.
+
+**Network:** Base Sepolia
+**Address:** `0x0c04318CFb1b3A725f7643f107B102E3c0dc719c`
+
+---
+
+## State Variables
+
+| Variable             | Type                          | Description                    |
+| -------------------- | ----------------------------- | ------------------------------ |
+| `totalPoolLiquidity` | `uint256`                     | Total USDC in the lending pool |
+| `lenderDeposits`     | `mapping(address => uint256)` | Per-lender USDC deposits       |
+| `operatorBonds`      | `mapping(address => uint256)` | Per-operator ETH bond balance  |
+
+---
+
+## Functions
+
+### `depositLiquidity(uint256 amount)`
+
+Lenders call this to add USDC to the pool.
+
+```solidity
+function depositLiquidity(uint256 amount) external
+```
+
+- Pulls `amount` of USDC from `msg.sender` (requires prior `approve`).
+- Increments `lenderDeposits[msg.sender]` and `totalPoolLiquidity`.
+
+---
+
+### `stakeBond()` payable
+
+Operators call this to post the ETH collateral bond.
+
+```solidity
+function stakeBond() external payable
+```
+
+- Requires `msg.value > 0` (standard is 0.01 ETH).
+- Adds to `operatorBonds[msg.sender]`.
+
+---
+
+### `issueLoan(address operator, address agentWallet, uint256 amount)` onlyOwner
+
+Issues a USDC loan to an agent's Coinbase CDP wallet.
+
+```solidity
+function issueLoan(address operator, address agentWallet, uint256 amount) external onlyOwner
+```
+
+**Pre-conditions checked:**
+
+1. Operator has a registered agent (`TRECIdentityRegistry.getAgentId(operator) > 0`).
+2. Agent is KYC-verified (`TRECValidationRegistry.isAgentVerified(tokenId)`).
+3. Operator has staked a bond (`operatorBonds[operator] > 0`).
+4. Pool has sufficient liquidity.
+
+**Effects:**
+
+- Transfers `amount` USDC to `agentWallet`.
+- Calls `TRECReputationRegistry.recordBorrow(agentId, amount)`.
+
+---
+
+### `repayLoan(uint256 agentId, uint256 amount)`
+
+Agent or operator repays an outstanding loan.
+
+```solidity
+function repayLoan(uint256 agentId, uint256 amount) external
+```
+
+- Pulls `amount` USDC from `msg.sender`.
+- Returns funds to the pool.
+- Calls `TRECReputationRegistry.recordRepayment(agentId, amount)` → credit score **+1**.
+
+---
+
+### `slashAndRecover(address operator, uint256 shortfall)` onlyOwner
+
+Called when an agent defaults. Seizes the operator's ETH bond to cover the USDC shortfall.
+
+```solidity
+function slashAndRecover(address operator, uint256 shortfall) external onlyOwner
+```
+
+- Converts and applies `operatorBonds[operator]` toward the `shortfall`.
+- Calls `TRECReputationRegistry.recordLiquidation(agentId)` → credit score **−50**.
+
+---
+
+## Events
+
+```solidity
+event LiquidityDeposited(address indexed lender, uint256 amount);
+event BondStaked(address indexed operator, uint256 amount);
+event LoanIssued(address indexed operator, address indexed agentWallet, uint256 amount);
+event LoanRepaid(uint256 indexed agentId, uint256 amount);
+event BondSlashed(address indexed operator, uint256 shortfall);
+```

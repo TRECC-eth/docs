@@ -1,0 +1,56 @@
+---
+title: "MockUSDC"
+description: "Test ERC-20 token with 6 decimals used for lending on Sepolia"
+---
+
+## Overview
+
+`MockUSDC` is a standard ERC-20 token mimicking real USDC (6 decimals, `mint` function for testing). It is used as the lending currency across the TRECC protocol on Sepolia.
+
+**Network:** Ethereum Sepolia
+**Address:** `0x17cCeBc2960F50042Fb8f64c18478f083FF0ACDc`
+
+---
+
+## Functions
+
+### `mint(address to, uint256 amount)`
+
+Mints test USDC to any address. Available to anyone on testnet.
+
+```solidity
+function mint(address to, uint256 amount) external
+```
+
+```ts
+// Mint 1000 USDC (6 decimals)
+await mockUSDC.mint(myAddress, 1000n * 10n**6n)
+```
+
+### `transfer(address to, uint256 amount) → bool`
+
+Standard ERC-20 transfer.
+
+### `approve(address spender, uint256 amount) → bool`
+
+Approve `TRECVault` (or any contract) to pull USDC on your behalf. Required before `depositLiquidity` and `repayLoan`.
+
+```solidity
+MockUSDC.approve(TRECVaultAddress, amount)
+```
+
+---
+
+## Decimals
+
+MockUSDC uses **6 decimals**, matching real USDC:
+
+| Human Amount | On-chain Value |
+|---|---|
+| 1 USDC | `1_000_000` |
+| 100 USDC | `100_000_000` |
+| 1000 USDC | `1_000_000_000` |
+
+<Note>
+  Always multiply amounts by `10**6` when interacting with the contract programmatically.
+</Note>

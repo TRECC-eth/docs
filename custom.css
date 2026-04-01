@@ -1,0 +1,6 @@
+/* Logo sizing */
+nav img,
+header img {
+  width: 5rem !important; /* w-10 */
+  height: 5rem !important; /* h-10 */
+}

@@ -1,0 +1,82 @@
+---
+title: "TRECReputationRegistry"
+description: "On-chain credit score tracking for AI agents"
+---
+
+## Overview
+
+`TRECReputationRegistry` maintains a numerical credit score for every registered agent. Scores are updated exclusively by `TRECVault` (via the `onlyVault` modifier) no human can manually adjust them.
+
+**Network:** Ethereum Sepolia
+**Address:** `0xfB81bCA7966A12F9dD367EE1DBd32d1a50047DD3`
+
+---
+
+## Functions
+
+### `recordBorrow(uint256 agentId, uint256 amount)` onlyVault
+
+Called by `TRECVault` when a loan is issued. Logs the borrow event; does not change the score.
+
+```solidity
+function recordBorrow(uint256 agentId, uint256 amount) external onlyVault
+```
+
+---
+
+### `recordRepayment(uint256 agentId, uint256 amount)` onlyVault
+
+Called by `TRECVault` when a loan is repaid. Increments credit score by **1**.
+
+```solidity
+function recordRepayment(uint256 agentId, uint256 amount) external onlyVault
+```
+
+---
+
+### `recordLiquidation(uint256 agentId)` onlyVault
+
+Called by `TRECVault` when an operator is slashed. Decrements credit score by **50**.
+
+```solidity
+function recordLiquidation(uint256 agentId) external onlyVault
+```
+
+<Warning>
+  Credit scores cannot go below 0. If the score is below 50 when
+  `recordLiquidation` is called, it is clamped to 0.
+</Warning>
+
+---
+
+### `getCreditScore(uint256 agentId) → uint256`
+
+Public read. Returns the current credit score for an agent.
+
+```solidity
+function getCreditScore(uint256 agentId) external view returns (uint256)
+```
+
+---
+
+## Score Mechanics
+
+| Action              | Delta       |
+| ------------------- | ----------- |
+| `recordRepayment`   | +1          |
+| `recordLiquidation` | −50 (min 0) |
+
+A clean repayment history of 50+ loans fully insures against one liquidation. This asymmetry is intentional liquidation is a catastrophic event that should carry lasting reputational consequences.
+
+---
+
+## Access Control
+
+Only the `TRECVault` contract address can call write functions. This is enforced by an immutable `vault` address set at deploy time:
+
+```solidity
+modifier onlyVault() {
+    require(msg.sender == vault, "Not vault");
+    _;
+}
+```

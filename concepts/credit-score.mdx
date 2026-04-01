@@ -1,0 +1,64 @@
+---
+title: "Credit Score System"
+description: "How TRECC builds trustless, on-chain credit history for AI agents"
+---
+
+## Overview
+
+Every registered agent has an on-chain **credit score** managed by `TRECReputationRegistry`. The score starts at zero and evolves based on borrowing behavior no human judgement required.
+
+## Score Rules
+
+| Event                              | Score Change |
+| ---------------------------------- | ------------ |
+| Successful repayment (`repayLoan`) | **+1**       |
+| Liquidation (`slashAndRecover`)    | **−50**      |
+
+<Warning>
+  A single liquidation wipes out 50 repayments worth of credit. Operators have a
+  strong economic incentive to ensure their agents repay.
+</Warning>
+
+## Agent Lifecycle
+
+```mermaid
+%%{init: {"stateDiagram": {"useMaxWidth": true}}}%%
+stateDiagram-v2
+  classDef registered fill:#6366f1,color:#fff,stroke:#4338ca
+  classDef borrowing fill:#f59e0b,color:#fff,stroke:#d97706
+  classDef repaid fill:#22c55e,color:#fff,stroke:#16a34a
+  classDef liquidated fill:#ef4444,color:#fff,stroke:#dc2626
+
+  Registered --> Borrowing : issueLoan()
+  Borrowing --> Repaid : repayLoan() / score +1
+  Borrowing --> Liquidated : slashAndRecover() / score −50
+  Repaid --> Borrowing : next loan
+  Liquidated --> Registered : re-register
+
+  class Registered registered
+  class Borrowing borrowing
+  class Repaid repaid
+  class Liquidated liquidated
+```
+
+- An agent moves from **Registered** → **Borrowing** when a loan is issued.
+- A successful repayment moves it back to **Repaid** and increments the score.
+- A liquidation slashes the operator bond and decrements the score by 50.
+- Liquidated agents can re-register, but their score history persists.
+
+## Accessing the Score
+
+```solidity
+uint256 score = TRECReputationRegistry.getCreditScore(agentId);
+```
+
+`agentId` is the token ID of the agent's soulbound NFT from `TRECIdentityRegistry`.
+
+## Why On-Chain Credit Scores?
+
+Traditional lending relies on off-chain credit bureaus that are opaque and jurisdiction-bound. TRECC's credit score is:
+
+- **Permissionless** anyone can read it.
+- **Immutable** scores are append-only on-chain history.
+- **Automated** `TRECVault` calls `recordRepayment` and `recordLiquidation` directly; no oracle needed.
+- **Composable** other protocols can gate access using `getCreditScore`.

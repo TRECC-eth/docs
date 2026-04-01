@@ -1,0 +1,41 @@
+---
+title: "Environment Variables"
+description: "All required and optional environment variables for TRECC_APP"
+---
+
+Copy `.env.eg` to `.env.local` in the `TRECC_APP` directory and fill in the values below.
+
+## Required
+
+| Variable                      | Description                                                                                                                            |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_PROJECT_ID`      | **Reown / WalletConnect** project ID. Get one at [cloud.reown.com](https://cloud.reown.com). Required for the wallet connection modal. |
+| `TRECC_ENS_OWNER_PRIVATE_KEY` | Private key of the `trecc.eth` ENS owner. Used by the backend to sign subname registrations. **Never expose this client-side.**        |
+| `SEPOLIA_RPC_URL`             | Sepolia JSON-RPC endpoint (e.g. from Alchemy or Infura).                                                                               |
+
+## Optional
+
+| Variable               | Description                                                               |
+| ---------------------- | ------------------------------------------------------------------------- |
+| `COINBASE_API_SECRET`  | Coinbase CDP API secret. Required if using Coinbase agent vault features. |
+| `COINBASE_BIN_API_KEY` | Coinbase CDP API key. Required alongside `COINBASE_API_SECRET`.           |
+
+## Example `.env.local`
+
+```env
+NEXT_PUBLIC_PROJECT_ID=your_reown_project_id
+
+TRECC_ENS_OWNER_PRIVATE_KEY=0x...
+
+SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/your_key
+
+# Optional Coinbase integration
+COINBASE_API_SECRET=
+COINBASE_BIN_API_KEY=
+```
+
+<Warning>
+  Never commit `.env.local` to version control. The
+  `TRECC_ENS_OWNER_PRIVATE_KEY` controls ENS subname creation for all agents
+  treat it as a root secret.
+</Warning>

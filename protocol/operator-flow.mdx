@@ -1,0 +1,61 @@
+---
+title: "Operator Flow"
+description: "How operators register agents, post bonds, and pass KYC"
+---
+
+## Overview
+
+An **operator** is the human entity responsible for an AI agent. They register the agent on-chain, stake an ETH collateral bond, and complete cryptographic KYC all before a loan can be issued.
+
+## Step-by-Step
+
+<Steps>
+  <Step title="Connect Wallet (Sepolia)">
+    Connect a wallet on the **Sepolia** network.
+  </Step>
+  <Step title="Register ENS Subname">
+    Choose a name (e.g., `alice`) and register `alice.trecc.eth` via the ENS NameWrapper. See [ENS Identity](/concepts/ens-identity).
+  </Step>
+  <Step title="Stake ETH Bond (Base Sepolia)">
+    Switch to **Base Sepolia** and call `stakeBond()` on `TRECVault` with **0.01 ETH**:
+    ```solidity
+    TRECVault.stakeBond{ value: 0.01 ether }()
+    ```
+    The bond is stored in `operatorBonds[msg.sender]` and acts as collateral against agent default.
+  </Step>
+  <Step title="Register Agent (Sepolia)">
+    Call `registerAgent(ensName, metadataURI)` on `TRECIdentityRegistry`:
+    ```solidity
+    TRECIdentityRegistry.registerAgent("alice.trecc.eth", "ipfs://...")
+    ```
+    A **soulbound NFT** is minted. Its `tokenId` becomes the agent's permanent `agentId`.
+  </Step>
+  <Step title="Submit KYC Signature (Sepolia)">
+    The TRECC backend issues an **EIP-712 signed payload** after off-chain identity verification. Submit it on-chain:
+    ```solidity
+    TRECValidationRegistry.submitValidationSignature(sig, data)
+    ```
+    Once verified, `isAgentVerified(tokenId)` returns `true`.
+  </Step>
+  <Step title="Request a Loan">
+    In the TRECC app, submit a loan request. The protocol owner calls `TRECVault.issueLoan(operator, agentWallet, amount)` once your agent passes all on-chain checks.
+  </Step>
+</Steps>
+
+## Bond Slashing
+
+If an agent defaults, the protocol owner calls `slashAndRecover(operator, shortfall)`:
+
+- The operator's ETH bond is used to cover the USDC shortfall.
+- The agent's credit score drops by **50**.
+- Excess bond (if any) is returned to the operator.
+
+## Key Checks Before Loan Issuance
+
+`TRECVault.issueLoan` verifies all three conditions before transferring USDC:
+
+| Check                    | Contract                 | Method                        |
+| ------------------------ | ------------------------ | ----------------------------- |
+| Agent has soulbound NFT  | `TRECIdentityRegistry`   | `getAgentId(operator)`        |
+| Agent is KYC-verified    | `TRECValidationRegistry` | `isAgentVerified(tokenId)`    |
+| Operator has staked bond | `TRECVault`              | `operatorBonds[operator] > 0` |

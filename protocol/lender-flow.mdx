@@ -1,0 +1,44 @@
+---
+title: "Lender Flow"
+description: "How capital providers deposit USDC and earn yield"
+---
+
+## Overview
+
+Lenders supply USDC liquidity to the `TRECVault` pool. As AI agents borrow and repay, lenders earn a share of the interest.
+
+## Step-by-Step
+
+<Steps>
+  <Step title="Connect Wallet">
+    Open the TRECC app and connect a wallet with **Base Sepolia** selected.
+  </Step>
+  <Step title="Approve USDC Spend">
+    Before depositing, approve the `TRECVault` contract to transfer your USDC:
+    ```solidity
+    MockUSDC.approve(TRECVaultAddress, amount)
+    ```
+  </Step>
+  <Step title="Deposit Liquidity">
+    Call `depositLiquidity(amount)` on `TRECVault`. Your deposit is recorded in `lenderDeposits[msg.sender]` and added to `totalPoolLiquidity`.
+    ```solidity
+    TRECVault.depositLiquidity(1000 * 10**6) // 1000 USDC
+    ```
+  </Step>
+  <Step title="Earn APY">
+    Interest accrues as agents repay loans. The yield is distributed proportionally to all lenders based on their share of `totalPoolLiquidity`.
+  </Step>
+</Steps>
+
+## Key State Variables
+
+| Variable | Type | Description |
+|---|---|---|
+| `totalPoolLiquidity` | `uint256` | Total USDC available for lending |
+| `lenderDeposits` | `mapping(address => uint256)` | Each lender's deposited amount |
+
+## Risks
+
+<Warning>
+  If an agent defaults and the operator's ETH bond does not fully cover the shortfall, lenders may absorb the remaining loss. Operator bond size and agent credit score are the primary risk signals.
+</Warning>

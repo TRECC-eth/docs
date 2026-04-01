@@ -1,80 +1,87 @@
 ---
 title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+description: "Start using TRECC in minutes  as a lender or an operator"
 ---
 
-## Get started in three steps
+## Before you begin
 
-Get your documentation site running locally and make your first customization.
-
-### Step 1: Set up your local environment
-
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
-
-### Step 2: Deploy your changes
-
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
-
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
-
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
-
-### Step 3: Go live
-
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
-
-## Next steps
-
-Now that you have your docs running, explore these key features:
+You'll need a Web3 wallet (MetaMask, Coinbase Wallet, or any WalletConnect-compatible wallet) and some testnet funds.
 
 <CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
+  <Card title="Sepolia ETH" icon="ethereum">
+    Required for gas fees and the **0.01 ETH operator bond**. Get from a Sepolia
+    faucet.
+  </Card>
+  <Card title="Sepolia USDC" icon="coin">
+    Required to deposit liquidity as a lender. Mint test USDC from the
+    `MockUSDC` contract: `0x17cCeBc2960F50042Fb8f64c18478f083FF0ACDc`
+  </Card>
 </CardGroup>
 
+---
+
+## I want to lend
+
+Lenders supply USDC to the pool and earn yield as AI agents repay loans.
+
+<Steps>
+  <Step title="Open the TRECC app and connect your wallet">
+    Switch your wallet to **Base Sepolia**, then click **Connect Wallet**.
+  </Step>
+  <Step title="Approve USDC spending">
+    Approve the `TRECVault` contract to transfer your USDC before depositing.
+  </Step>
+  <Step title="Deposit liquidity">
+    Enter the amount of USDC you want to supply and confirm the
+    `depositLiquidity` transaction. Your share of the pool is recorded
+    immediately.
+  </Step>
+  <Step title="Earn yield">
+    Interest accrues automatically as agents repay loans no further action
+    needed.
+  </Step>
+</Steps>
+
 <Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
+  See [Lender Flow](/protocol/lender-flow) for a full breakdown of how yield is
+  distributed and what risks to consider.
+</Note>
+
+---
+
+## I want to be an operator
+
+Operators register AI agents on-chain, stake a collateral bond, and pass KYC so their agents can receive loans.
+
+<Steps>
+  <Step title="Connect your wallet on Sepolia">
+    Open the TRECC app, switch to the **Sepolia** network, and connect your
+    wallet.
+  </Step>
+  <Step title="Register an ENS subname">
+    Claim a name like `alice.trecc.eth` via the ENS NameWrapper. This is your
+    agent's on-chain identity. See [ENS Identity](/concepts/ens-identity).
+  </Step>
+  <Step title="Stake your ETH bond">
+    Switch to **Base Sepolia** and stake **0.01 ETH** as collateral. The bond
+    protects lenders if your agent defaults.
+  </Step>
+  <Step title="Register your agent">
+    Submit `registerAgent(ensName, metadataURI)` on `TRECIdentityRegistry`. A
+    soulbound NFT is minted and becomes your agent's permanent ID.
+  </Step>
+  <Step title="Complete KYC">
+    TRECC verifies your identity off-chain and issues a signed payload. Submit
+    it on-chain to mark your agent as verified.
+  </Step>
+  <Step title="Request a loan">
+    Once verified, use the TRECC app to submit a loan request. The protocol
+    verifies your agent's identity, KYC status, and bond before issuing the
+    loan.
+  </Step>
+</Steps>
+
+<Note>
+  See [Operator Flow](/protocol/operator-flow) for details on bond slashing,
+  credit scores, and the full set of on-chain checks before a loan is issued.
 </Note>

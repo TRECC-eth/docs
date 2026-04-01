@@ -1,0 +1,67 @@
+---
+title: "Frontend Setup"
+description: "Run the TRECC_APP Next.js frontend locally"
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16.1.6 (App Router) |
+| UI | React 19.2.3 + Tailwind CSS 4 |
+| Blockchain | Wagmi 2.19.5 + Viem 2.47.4 |
+| Wallet Modal | Reown AppKit 1.8.19 |
+| Data Fetching | TanStack React Query 5 |
+| ENS | Viem ENS utilities + ethers.js 6 |
+| Agent Wallet | Coinbase CDP (MPC Vault) |
+
+## Directory Structure
+
+```
+TRECC_APP/
+├── app/          # Next.js App Router pages
+├── components/   # React components
+├── hooks/        # Custom Wagmi/React hooks
+├── lib/          # Utilities and helpers
+├── constants/    # ABIs and contract addresses
+├── config/       # Wagmi + Reown configuration
+└── data/
+    ├── agent.json       # Agent identity data
+    └── agent_log.json   # Agent activity logs
+```
+
+## Installation
+
+```bash
+cd TRECC_APP
+npm install
+cp .env.eg .env.local
+# Fill in environment variables
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Wagmi Configuration
+
+The app is configured for two chains simultaneously via `config/`:
+
+```ts
+import { createConfig } from 'wagmi'
+import { sepolia, baseSepolia } from 'viem/chains'
+import { createAppKit } from '@reown/appkit'
+
+export const config = createConfig({
+  chains: [sepolia, baseSepolia],
+  // ...transports
+})
+```
+
+Users are prompted to switch chains as needed for different actions.
+
+## Building for Production
+
+```bash
+npm run build
+npm start
+```

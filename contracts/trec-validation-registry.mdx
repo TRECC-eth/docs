@@ -1,0 +1,99 @@
+---
+title: "TRECValidationRegistry"
+description: "EIP-712 typed-signature KYC verification for AI agents"
+---
+
+## Overview
+
+`TRECValidationRegistry` verifies off-chain KYC using **EIP-712 structured data signing**. The TRECC backend performs identity checks and signs a payload. The operator then submits this signature on-chain, where the contract recovers and validates the signer.
+
+**Network:** Ethereum Sepolia
+**Address:** `0x9F7e8DFEC3d9871F6ff896E7c429E7968E1Ba347`
+
+---
+
+## Functions
+
+### `submitValidationSignature(bytes sig, bytes data)`
+
+Submits a backend-issued EIP-712 signature for KYC verification.
+
+```solidity
+function submitValidationSignature(bytes calldata sig, bytes calldata data) external
+```
+
+- `data` contains the structured payload (operator address, agentId, timestamp, etc.).
+- `sig` is the ECDSA signature from the TRECC backend signer.
+- The contract recovers the signer address and verifies it matches the authorized backend key.
+- On success, marks the agent's `tokenId` as verified.
+
+---
+
+### `isAgentVerified(uint256 tokenId) → bool`
+
+Returns whether the agent has passed KYC.
+
+```solidity
+function isAgentVerified(uint256 tokenId) external view returns (bool)
+```
+
+`TRECVault` calls this before issuing any loan.
+
+---
+
+## EIP-712 Domain
+
+```solidity
+DOMAIN_SEPARATOR = keccak256(abi.encode(
+    keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"),
+    keccak256("TRECValidationRegistry"),
+    keccak256("1"),
+    block.chainid,
+    address(this)
+))
+```
+
+## Typed Data Struct
+
+```solidity
+struct ValidationData {
+    address operator;
+    uint256 agentId;
+    uint256 expiry;
+}
+
+bytes32 constant VALIDATION_TYPEHASH = keccak256(
+    "ValidationData(address operator,uint256 agentId,uint256 expiry)"
+);
+```
+
+---
+
+## How the Backend Issues Signatures
+
+The TRECC backend (Node.js) uses ethers.js to sign:
+
+```ts
+const domain = {
+  name: 'TRECValidationRegistry',
+  version: '1',
+  chainId: 11155111, // Sepolia
+  verifyingContract: '0x9F7e8DFEC3d9871F6ff896E7c429E7968E1Ba347',
+}
+
+const types = {
+  ValidationData: [
+    { name: 'operator', type: 'address' },
+    { name: 'agentId',  type: 'uint256' },
+    { name: 'expiry',   type: 'uint256' },
+  ],
+}
+
+const value = {
+  operator: operatorAddress,
+  agentId:  tokenId,
+  expiry:   Math.floor(Date.now() / 1000) + 3600, // 1 hour
+}
+
+const sig = await signer.signTypedData(domain, types, value)
+```

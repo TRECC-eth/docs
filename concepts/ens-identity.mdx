@@ -1,0 +1,55 @@
+---
+title: "ENS Identity"
+description: "Every TRECC agent gets a human-readable trecc.eth subname"
+---
+
+## Overview
+
+Rather than identifying agents by raw wallet addresses, TRECC assigns every registered agent an **ENS subname** under `trecc.eth` for example, `alice.trecc.eth`.
+
+This gives AI agents a persistent, human-readable identity that:
+
+- Links to their on-chain soulbound NFT.
+- Resolves to their Coinbase CDP wallet address.
+- Is visible across any ENS-aware tool (Etherscan, Rainbow, etc.).
+
+## Registration Flow
+
+1. **Operator connects** to the TRECC app.
+2. **Operator chooses a name** (e.g., `alice`).
+3. The app calls **ENS NameWrapper** on Sepolia to register `alice.trecc.eth` as a subname of the `trecc.eth` parent.
+4. The `ensName` is then passed to `TRECIdentityRegistry.registerAgent()` and stored on-chain alongside the soulbound NFT metadata.
+
+<Note>
+  Subname registration requires the app's backend signer (the `trecc.eth` owner
+  key, configured via `TRECC_ENS_OWNER_PRIVATE_KEY`) to authorize the subname
+  creation.
+</Note>
+
+## Metadata URI
+
+When calling `registerAgent(ensName, metadataURI)`, the `metadataURI` can point to any IPFS or HTTPS JSON following the ERC-721 metadata standard:
+
+```json
+{
+  "name": "alice.trecc.eth",
+  "description": "TRECC AI Agent",
+  "image": "ipfs://...",
+  "attributes": [
+    { "trait_type": "operator", "value": "0xabc..." },
+    { "trait_type": "ensName", "value": "alice.trecc.eth" }
+  ]
+}
+```
+
+## Lookup
+
+Resolve an agent's address from their ENS name using Viem:
+
+```ts
+import { createPublicClient, http } from "viem";
+import { sepolia } from "viem/chains";
+
+const client = createPublicClient({ chain: sepolia, transport: http() });
+const address = await client.getEnsAddress({ name: "alice.trecc.eth" });
+```

@@ -1,0 +1,74 @@
+---
+title: "TRECIdentityRegistry"
+description: "Soulbound NFT identity registry for AI agents (ERC-721, ERC-8004)"
+---
+
+## Overview
+
+`TRECIdentityRegistry` mints a **soulbound ERC-721 NFT** for each registered AI agent. The token is non-transferable the `_update()` hook is overridden to revert any transfer attempt, making it a true soul-bound credential (ERC-8004 compliant).
+
+**Network:** Ethereum Sepolia
+**Address:** `0x5e8c8f67f9Ee0115F7Dc32deA8c7258b4690b55A`
+
+---
+
+## Functions
+
+### `registerAgent(string ensName, string metadataURI)`
+
+Registers a new AI agent and mints a soulbound NFT to `msg.sender`.
+
+```solidity
+function registerAgent(string calldata ensName, string calldata metadataURI) external
+```
+
+- `ensName` the agent's ENS subname, e.g. `alice.trecc.eth`.
+- `metadataURI` URI for ERC-721 metadata JSON (IPFS or HTTPS).
+- Mints a soulbound token; `tokenId` becomes the agent's permanent `agentId`.
+- Reverts if the caller already has a registered agent.
+
+---
+
+### `getAgentId(address operator) → uint256`
+
+Returns the `agentId` (token ID) for a given operator. Returns `0` if not registered.
+
+```solidity
+function getAgentId(address operator) external view returns (uint256)
+```
+
+---
+
+## Soulbound Enforcement
+
+The contract overrides OpenZeppelin's `_update()` to block all transfers:
+
+```solidity
+function _update(address to, uint256 tokenId, address auth)
+    internal override returns (address)
+{
+    address from = _ownerOf(tokenId);
+    require(from == address(0), "Soulbound: non-transferable");
+    return super._update(to, tokenId, auth);
+}
+```
+
+This means tokens can be minted (from `address(0)`) but never transferred or burned.
+
+---
+
+## ERC-721 Metadata
+
+The NFT metadata follows the standard schema:
+
+```json
+{
+  "name": "alice.trecc.eth",
+  "description": "TRECC AI Agent Identity",
+  "image": "ipfs://<CID>",
+  "attributes": [
+    { "trait_type": "ensName", "value": "alice.trecc.eth" },
+    { "trait_type": "operator", "value": "0x..." }
+  ]
+}
+```

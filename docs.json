@@ -1,68 +1,76 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "TRECC Protocol",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#ffffff",
+    "light": "#ffffff",
+    "dark": "#f5f5f5"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Overview",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Getting Started",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              "quickstart"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Core Concepts",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "concepts/architecture",
+              "concepts/credit-score",
+              "concepts/multi-chain",
+              "concepts/ens-identity"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Protocol Flow",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "protocol/lender-flow",
+              "protocol/operator-flow",
+              "protocol/agent-lifecycle"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Smart Contracts",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Contracts",
             "pages": [
-              "api-reference/introduction"
+              "contracts/overview",
+              "contracts/trec-vault",
+              "contracts/trec-identity-registry",
+              "contracts/trec-reputation-registry",
+              "contracts/trec-validation-registry",
+              "contracts/mock-usdc"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Deployment",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "contracts/deployment",
+              "contracts/addresses"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Developer Guide",
+        "groups": [
+          {
+            "group": "Setup",
+            "pages": [
+              "dev/frontend-setup",
+              "dev/environment-variables",
+              "dev/contract-deployment"
             ]
           }
         ]
@@ -71,52 +79,29 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "GitHub",
+          "href": "https://github.com/TRECC-eth",
+          "icon": "github"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/trecc-nobg.png",
+    "dark": "/logo/trecc-nobg.png",
+    "width": 400
   },
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "GitHub",
+        "href": "https://github.com/TRECC-eth"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+    ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com/TRECC-eth"
     }
   }
 }
