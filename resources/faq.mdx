@@ -1,0 +1,83 @@
+﻿---
+title: "FAQ"
+description: "Frequently asked questions about the TRECC Protocol"
+icon: "circle-question"
+---
+
+## For Lenders
+
+### How do I earn yield on TRECC?
+
+Deposit USDC into the TRECC Vault. You receive tUSDC shares whose value automatically increases as AI agents generate yield. When you're ready to withdraw, redeem your tUSDC for more USDC than you deposited.
+
+### Can I lose my deposit?
+
+The protocol is designed so that lenders never absorb losses. Agent collateral covers losses first, and the Insurance Fund backstops any residual bad debt. However, smart contract risk (bugs, exploits) can never be fully eliminated in any DeFi protocol.
+
+### How is the APY determined?
+
+APY depends on how much yield the AI agents generate and how much total capital is in the vault. More successful agents and higher utilisation means higher yield for lenders. There is no fixed rate - it fluctuates based on market conditions.
+
+### Can I withdraw at any time?
+
+Yes, as long as there is sufficient idle USDC in the vault. If most capital is currently deployed to agents, you may need to wait for agents to repay before your withdrawal can be processed.
+
+### What is tUSDC?
+
+tUSDC is your receipt token - proof of your deposit. It follows the ERC-4626 standard, meaning its value appreciates automatically as yield flows into the vault. You don't need to claim rewards or restake.
+
+---
+
+## For Borrowers (Operators)
+
+### What do I need to deploy an agent?
+
+You need USDC for collateral and the ability to interact with the TRECC protocol's smart contracts. The protocol handles agent wallet creation, key generation, and registration.
+
+### How much collateral is required?
+
+Collateral requirements scale with your desired borrowing amount. Smaller loans require less collateral; larger loans require more. As your agent builds reputation through successful repayments, collateral requirements may decrease.
+
+### What happens if my agent gets liquidated?
+
+Your collateral is partially or fully consumed to cover the loss. Your agent's reputation score takes a significant hit, reducing its future borrowing capacity. The agent can continue operating, but rebuilding reputation takes many successful repayments.
+
+### Can I control what my agent does?
+
+You configure the agent's strategy at deployment - risk tolerance, preferred protocols, and goals. Once live, the agent operates autonomously within those parameters and the protocol's constraints. You can suspend your agent at any time via the Agent Registry.
+
+### What protocols can my agent use?
+
+Only protocols with whitelisted adapters. Currently this includes major DeFi protocols like Aave, Compound, Uniswap, and others. Agents cannot interact with any contract not on the approved list.
+
+---
+
+## General
+
+### Is TRECC audited?
+
+<Warning>
+  TRECC is currently deployed on testnet and is under active development. Contracts have not yet undergone formal third-party audits. Do not deposit real funds.
+</Warning>
+
+### What blockchain does TRECC use?
+
+TRECC operates across two networks:
+- **Base Sepolia** - where the Vault and agent wallets live (capital operations)
+- **Ethereum Sepolia** - where agent identity and reputation are registered
+
+### What is ERC-8004?
+
+ERC-8004 is a standard for autonomous agent reputation. It defines how agents establish identity, accumulate a verifiable track record, and have that reputation recognised across protocols. Think of it as a decentralised, on-chain credit score for AI agents.
+
+### How is this different from other DeFi lending protocols?
+
+Most DeFi lending (Aave, Compound) is overcollateralised - you deposit more than you borrow. TRECC enables undercollateralised lending specifically for AI agents, made possible by execution constraints, automated risk management, and on-chain reputation.
+
+### Can a rogue AI drain the vault?
+
+No. The agent's Execution Module only allows calls to whitelisted contracts. There is no code path that permits transferring vault funds to an arbitrary wallet. Even if the AI model is fully compromised, the smart contract constraints prevent fund theft.
+
+<Note>
+  If you have a question not covered here, check the [Glossary](/resources/glossary) for term definitions or explore the [Core Concepts](/concepts/ai-agents) section for deeper explanations.
+</Note>

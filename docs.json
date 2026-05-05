@@ -16,92 +16,54 @@
           {
             "group": "Getting Started",
             "pages": [
-              "index",
-              "quickstart"
+              "index"
+            ]
+          },
+          {
+            "group": "For Lenders",
+            "pages": [
+              "lenders/how-lending-works",
+              "lenders/yield-and-returns",
+              "lenders/protections",
+              "lenders/getting-started"
+            ]
+          },
+          {
+            "group": "For Borrowers",
+            "pages": [
+              "borrowers/how-borrowing-works",
+              "borrowers/agent-architecture",
+              "borrowers/collateral-and-reputation",
+              "borrowers/getting-started"
             ]
           },
           {
             "group": "Core Concepts",
             "pages": [
-              "concepts/architecture",
-              "concepts/credit-score",
-              "concepts/multi-chain",
-              "concepts/ens-identity"
+              "concepts/ai-agents",
+              "concepts/the-vault",
+              "concepts/risk-and-collateral",
+              "concepts/identity-and-reputation",
+              "concepts/security"
             ]
           },
           {
-            "group": "Protocol Flow",
+            "group": "Resources",
             "pages": [
-              "protocol/lender-flow",
-              "protocol/operator-flow",
-              "protocol/agent-lifecycle"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Smart Contracts",
-        "groups": [
-          {
-            "group": "Contracts",
-            "pages": [
-              "contracts/overview",
-              "contracts/trec-vault",
-              "contracts/trec-identity-registry",
-              "contracts/trec-reputation-registry",
-              "contracts/trec-validation-registry",
-              "contracts/mock-usdc"
-            ]
-          },
-          {
-            "group": "Deployment",
-            "pages": [
-              "contracts/deployment",
-              "contracts/addresses"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Developer Guide",
-        "groups": [
-          {
-            "group": "Setup",
-            "pages": [
-              "dev/frontend-setup",
-              "dev/environment-variables",
-              "dev/contract-deployment"
+              "resources/glossary",
+              "resources/faq"
             ]
           }
         ]
       }
     ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "GitHub",
-          "href": "https://github.com/TRECC-eth",
-          "icon": "github"
-        }
-      ]
-    }
+    "global": {}
   },
   "logo": {
     "light": "/logo/trecc-nobg.png",
     "dark": "/logo/trecc-nobg.png",
     "width": 400
   },
-  "navbar": {
-    "links": [
-      {
-        "label": "GitHub",
-        "href": "https://github.com/TRECC-eth"
-      }
-    ]
-  },
-  "footer": {
-    "socials": {
-      "github": "https://github.com/TRECC-eth"
-    }
-  }
+  "navbar": {},
+  "footer": {}
 }

@@ -1,0 +1,136 @@
+﻿---
+title: "Glossary"
+description: "Definitions of key terms used throughout the TRECC documentation"
+icon: "spell-check"
+---
+
+## A
+
+**Adapter**
+A smart contract that translates agent instructions into protocol-specific calls. Adapters are audited and whitelisted - agents can only interact with DeFi through these approved intermediaries.
+
+**Agent Operator**
+The human who deploys and manages a TRECC AI agent. The operator posts collateral, configures the agent's strategy, and bears financial responsibility for the agent's actions.
+
+**Agent Registry**
+The on-chain smart contract that records every registered agent - linking its operator, signing key, and wallet address. Mints identity tokens upon registration.
+
+**APY (Annual Percentage Yield)**
+The annualised rate of return on a deposit, including compounding. If a protocol offers 8% APY, a $1,000 deposit would earn approximately $80 over a full year.
+
+## B
+
+**Bad Debt**
+A loss that exceeds the agent's posted collateral. When this happens, the Insurance Fund covers the shortfall so lenders don't absorb the loss.
+
+**Base Sepolia**
+An Ethereum Layer 2 testnet where the TRECC Vault and agent wallets operate. Used for testing before mainnet deployment.
+
+## C
+
+**Collateral**
+USDC locked by an operator in the Risk Engine as a security deposit. If the agent loses money, the collateral absorbs the loss before lender funds are affected.
+
+**Composable**
+A property of tokens and protocols that allows them to interoperate - one protocol's output token can be used as input to another. tUSDC is composable because it follows the ERC-4626 standard.
+
+## D
+
+**DeFi (Decentralised Finance)**
+Financial protocols built on blockchains that operate without centralised intermediaries. Examples include Aave (lending), Uniswap (trading), and Compound (lending).
+
+**Defence in Depth**
+A security strategy using multiple independent layers of protection. If one layer is breached, others continue to function. TRECC uses five layers: hardware isolation, execution module, whitelist, risk limits, and insurance.
+
+## E
+
+**ERC-20**
+The standard interface for fungible tokens on Ethereum. USDC and tUSDC are both ERC-20 tokens.
+
+**ERC-721**
+The standard interface for non-fungible tokens (NFTs) on Ethereum. TRECC uses ERC-721 for agent identity tokens.
+
+**ERC-4626**
+A standard for tokenised yield-bearing vaults. The TRECC Vault follows this standard, issuing tUSDC shares that automatically appreciate as yield accumulates.
+
+**ERC-8004**
+A standard for autonomous agent identity and reputation. Defines how agents establish on-chain identity, accumulate reputation, and have that reputation verified by other protocols.
+
+**Execution Module**
+The smart contract "leash" between an agent's signer and its wallet. Intercepts every transaction and only allows calls to whitelisted adapters.
+
+## H
+
+**Hardware Security Enclave (HSE)**
+A tamper-proof hardware chip that generates and stores cryptographic keys. The key never leaves the chip - all signing operations happen internally. Used to protect agent signing keys.
+
+**Health Factor**
+A measure of how safe an agent's position is relative to its obligations. When health drops below the critical threshold, automated liquidation is triggered.
+
+## I
+
+**Insurance Fund**
+A protocol reserve that covers bad debt - losses exceeding an agent's collateral. Funded by fees from successful agent trades. Only the Risk Engine can draw from it.
+
+## L
+
+**Liquidation**
+The automated process of force-closing an agent's position when its health factor drops below the safety threshold. Recovered capital is returned to the vault, and losses are deducted from collateral.
+
+**Liquidity Provider (LP)**
+A user who deposits capital into the TRECC Vault. LPs earn yield from AI agent activity without actively managing positions. Also called "lenders."
+
+## M
+
+**Minting**
+Creating a new token on-chain. In TRECC, the Agent Registry "mints" an identity NFT when a new agent is registered.
+
+## O
+
+**On-chain**
+Data or logic that lives directly on the blockchain - publicly verifiable, immutable, and not controlled by any single entity.
+
+**Overcollateralised**
+A lending model where borrowers must deposit more collateral than they borrow (e.g., deposit $150 to borrow $100). Most DeFi lending protocols work this way. TRECC is the opposite - undercollateralised.
+
+## P
+
+**Prompt Injection**
+An attack where a malicious input tricks an AI into performing unintended actions. In TRECC, the Execution Module and whitelist prevent prompt injection from having any effect on fund movement.
+
+## R
+
+**Reputation Score**
+A numerical score stored on-chain that reflects an agent's borrowing history. Increases with successful repayments, decreases sharply with liquidations. Determines borrowing capacity and collateral requirements.
+
+**Risk Engine**
+The smart contract gatekeeper that authorises all borrows from the vault. Checks identity, reputation, and collateral before releasing capital. Also monitors health factors and triggers liquidations.
+
+## S
+
+**Smart Wallet**
+A programmable wallet implemented as a smart contract (rather than a simple private key). Allows complex access controls like the Execution Module to be attached permanently.
+
+**Soulbound**
+A token that cannot be transferred after minting. TRECC agent identity tokens are soulbound - they permanently belong to the agent that registered them.
+
+## T
+
+**tUSDC**
+The receipt token issued by the TRECC Vault when USDC is deposited. Represents proportional ownership of vault assets. Appreciates in value as yield accumulates.
+
+**TRECC Vault**
+The shared capital pool where lenders deposit USDC and agents borrow from. Implements ERC-4626 for standardised share accounting.
+
+## U
+
+**Undercollateralised**
+A lending model where borrowers post less collateral than they borrow (e.g., post $650 to borrow $5,500). Higher capital efficiency but requires additional safeguards - which is what TRECC provides.
+
+**USDC**
+A stablecoin pegged 1:1 to the US dollar. The base currency used throughout the TRECC protocol for deposits, borrowing, and repayments.
+
+## W
+
+**Whitelist**
+A registry of approved smart contracts that agents are permitted to call. Any transaction targeting a non-whitelisted address is automatically rejected by the Execution Module.

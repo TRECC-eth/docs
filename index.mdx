@@ -1,55 +1,78 @@
 ---
-title: "TRECC Protocol"
-description: "Trustless Reputation & Evaluation Credit  ERC-8004 AI Agent Lending"
+title: "Introduction"
+description: "TRECC - trustless lending infrastructure for autonomous AI agents"
+icon: "book-open"
 ---
 
 ## What is TRECC?
 
-TRECC is a trustless lending infrastructure built for the agentic economy. It bridges **capital providers** (lenders) with **autonomous AI agents** (borrowers) using on-chain identity, reputation scoring, and cryptographic KYC replacing traditional credit checks with verifiable on-chain behavior.
+TRECC is a decentralised lending protocol purpose-built for the agentic economy. It connects **liquidity providers** who want to earn yield with **autonomous AI agents** that borrow capital and deploy it across DeFi to generate returns.
 
-<Columns cols={3}>
-  <Card title="Lenders" icon="building-columns">
-    Deposit USDC into the TRECVault lending pool and earn APY as AI agents
-    borrow and repay.
+Traditional lending requires credit scores, income history, and human underwriters. None of that applies to an AI agent. TRECC replaces those with **on-chain identity**, **cryptographic reputation**, and **smart-contract-enforced risk controls**, making undercollateralised lending possible without trusting anyone.
+
+<Note>
+  TRECC stands for **Trustless Reputation & Evaluation Credit Protocol**. Every decision, from who can borrow to when a position is liquidated, is enforced by code, not people.
+</Note>
+
+## How It Works - The 30-Second Version
+
+```mermaid
+graph LR
+    LP[Liquidity Provider] -->|Deposits USDC| VAULT[TRECC Vault]
+    VAULT -->|Lends capital| AGENT[AI Agent Wallet]
+    AGENT -->|Deploys into| DEFI[DeFi Protocols]
+    DEFI -->|Yield returns| AGENT
+    AGENT -->|Repays + profit| VAULT
+    VAULT -->|Yield distributed| LP
+
+    style LP fill:#ffffff,stroke:#333333
+    style VAULT fill:#f5f5f5,stroke:#333333
+    style AGENT fill:#ffffff,stroke:#333333
+    style DEFI fill:#f5f5f5,stroke:#333333
+```
+
+1. **Lenders** deposit USDC into the TRECC Vault and receive receipt tokens that appreciate as yield flows in.
+2. **Borrowers** (AI agents) request capital from the vault, post collateral, and deploy funds into whitelisted DeFi protocols.
+3. **The protocol** enforces risk limits, monitors positions, and liquidates agents that breach their safety threshold automatically.
+
+## Who Is TRECC For?
+
+<Columns cols={2}>
+  <Card title="Liquidity Providers" icon="building-columns">
+    You want to earn yield on idle USDC without actively managing positions. You deposit once and let the protocol handle the rest. AI agents do the work, you collect returns.
   </Card>
-  <Card title="Operators" icon="user-shield">
-    Register AI agents with on-chain identity and post ETH collateral bonds to
-    unlock borrowing.
-  </Card>
-  <Card title="AI Agents" icon="robot">
-    ERC-8004 compliant autonomous agents that borrow USDC, execute tasks, and
-    repay loans to build credit.
+  <Card title="Agent Operators" icon="robot">
+    You run autonomous AI agents and need access to capital. TRECC lets your agent borrow, trade, and build a verifiable on-chain reputation. No human credit check required.
   </Card>
 </Columns>
 
-## Protocol at a Glance
+## What Makes TRECC Different
 
-| Property      | Detail                                                |
-| ------------- | ----------------------------------------------------- |
-| Standard      | ERC-8004 AI Agent Lending                             |
-| Identity      | Soulbound NFTs (non-transferable ERC-721)             |
-| Credit System | On-chain score: +1 per repayment, −50 per liquidation |
-| KYC           | EIP-712 typed signature verification                  |
-| ENS           | `<name>.trecc.eth` subnames for every agent           |
-| Agent Wallet  | Coinbase CDP (MPC Vault)                              |
+| Traditional DeFi Lending | TRECC |
+|---|---|
+| Overcollateralised (deposit $150 to borrow $100) | Undercollateralised (deposit $10 to borrow $100) |
+| Human borrowers with known wallets | Autonomous AI agents as borrowers |
+| Trust-based credit (off-chain scores) | Trustless reputation (on-chain, verifiable) |
+| Manual position management | AI-driven autonomous strategy |
+| Single protocol exposure | Multi-protocol yield optimisation |
+
+<Warning>
+  TRECC is currently deployed on **testnet** (Base Sepolia and Ethereum Sepolia). All USDC referenced in these docs is test currency. Do not send real funds to testnet contracts.
+</Warning>
 
 ## Explore the Docs
 
 <Columns cols={2}>
-  <Card title="Quickstart" icon="rocket" href="/quickstart">
-    Get the protocol running locally in minutes.
+  <Card title="For Lenders" icon="coins" href="/lenders/how-lending-works">
+    Understand how depositing works, how yield is generated, and what protections exist for your capital.
   </Card>
-  <Card
-    title="Architecture"
-    icon="diagram-project"
-    href="/concepts/architecture"
-  >
-    Understand how the contracts and frontend fit together.
+  <Card title="For Borrowers" icon="robot" href="/borrowers/how-borrowing-works">
+    Learn how AI agents borrow, trade, build reputation, and repay, all autonomously.
   </Card>
-  <Card title="Smart Contracts" icon="file-contract" href="/contracts/overview">
-    Deep-dive into each contract's interface and logic.
+  <Card title="Core Concepts" icon="lightbulb" href="/concepts/ai-agents">
+    Deep-dive into the vault, risk engine, identity system, and security architecture.
   </Card>
-  <Card title="Protocol Flow" icon="arrows-spin" href="/protocol/lender-flow">
-    Follow money and identity through the full lifecycle.
+  <Card title="Glossary" icon="spell-check" href="/resources/glossary">
+    Look up any term you don't recognise.
   </Card>
 </Columns>
