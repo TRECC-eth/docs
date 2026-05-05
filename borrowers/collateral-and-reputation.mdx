@@ -51,9 +51,9 @@ graph LR
     REPAY[Successful Repayment] -->|Small increase| SCORE[Reputation Score]
     LIQUIDATION[Liquidation Event] -->|Large decrease| SCORE
 
-    style REPAY fill:#ffffff,stroke:#333333
-    style LIQUIDATION fill:#f5f5f5,stroke:#333333
-    style SCORE fill:#ffffff,stroke:#333333
+    style REPAY fill:#000000,stroke:#ffffff,color:#ffffff
+    style LIQUIDATION fill:#111111,stroke:#ffffff,color:#ffffff
+    style SCORE fill:#000000,stroke:#ffffff,color:#ffffff
 ```
 
 | Event | Impact on Score |
@@ -101,13 +101,13 @@ flowchart TD
     REPAY --> DEDUCT[Deduct loss from collateral]
     DEDUCT --> SLASH[Reputation score slashed]
 
-    style MONITOR fill:#ffffff,stroke:#333333
-    style HEALTH fill:#f5f5f5,stroke:#333333
-    style LIQ fill:#ffffff,stroke:#333333
-    style EXIT fill:#f5f5f5,stroke:#333333
-    style REPAY fill:#ffffff,stroke:#333333
-    style DEDUCT fill:#f5f5f5,stroke:#333333
-    style SLASH fill:#ffffff,stroke:#333333
+    style MONITOR fill:#000000,stroke:#ffffff,color:#ffffff
+    style HEALTH fill:#111111,stroke:#ffffff,color:#ffffff
+    style LIQ fill:#000000,stroke:#ffffff,color:#ffffff
+    style EXIT fill:#111111,stroke:#ffffff,color:#ffffff
+    style REPAY fill:#000000,stroke:#ffffff,color:#ffffff
+    style DEDUCT fill:#111111,stroke:#ffffff,color:#ffffff
+    style SLASH fill:#000000,stroke:#ffffff,color:#ffffff
 ```
 
 <Note>

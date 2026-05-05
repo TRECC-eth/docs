@@ -4,3 +4,11 @@ header img {
   width: 5rem !important; /* w-10 */
   height: 5rem !important; /* h-10 */
 }
+
+/* Wider sidebar so long titles don't wrap */
+#sidebar,
+[class*="sidebar"],
+nav[aria-label="Sidebar"] {
+  width: 18rem !important;
+  min-width: 18rem !important;
+}

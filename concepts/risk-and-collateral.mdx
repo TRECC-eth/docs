@@ -42,14 +42,14 @@ flowchart TD
     CHECK3 -->|No| REJECT3[Request denied]
     CHECK3 -->|Yes| APPROVE[Capital released<br/>from vault to agent]
 
-    style REQ fill:#ffffff,stroke:#333333
-    style CHECK1 fill:#f5f5f5,stroke:#333333
-    style CHECK2 fill:#f5f5f5,stroke:#333333
-    style CHECK3 fill:#f5f5f5,stroke:#333333
-    style REJECT1 fill:#ffffff,stroke:#333333
-    style REJECT2 fill:#ffffff,stroke:#333333
-    style REJECT3 fill:#ffffff,stroke:#333333
-    style APPROVE fill:#ffffff,stroke:#333333
+    style REQ fill:#000000,stroke:#ffffff,color:#ffffff
+    style CHECK1 fill:#111111,stroke:#ffffff,color:#ffffff
+    style CHECK2 fill:#111111,stroke:#ffffff,color:#ffffff
+    style CHECK3 fill:#111111,stroke:#ffffff,color:#ffffff
+    style REJECT1 fill:#000000,stroke:#ffffff,color:#ffffff
+    style REJECT2 fill:#000000,stroke:#ffffff,color:#ffffff
+    style REJECT3 fill:#000000,stroke:#ffffff,color:#ffffff
+    style APPROVE fill:#000000,stroke:#ffffff,color:#ffffff
 ```
 
 If any check fails, the transaction reverts - no capital moves. There is no override, no admin bypass, and no exception process.

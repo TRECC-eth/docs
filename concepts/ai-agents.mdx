@@ -21,11 +21,11 @@ graph TD
     MODULE -->|Approved calls only| SAFE[Smart Wallet - Fund Custody]
     SAFE -->|Interacts with| PROTOCOLS[Approved DeFi Protocols]
 
-    style AI fill:#ffffff,stroke:#333333
-    style ENCLAVE fill:#f5f5f5,stroke:#333333
-    style MODULE fill:#ffffff,stroke:#333333
-    style SAFE fill:#f5f5f5,stroke:#333333
-    style PROTOCOLS fill:#ffffff,stroke:#333333
+    style AI fill:#000000,stroke:#ffffff,color:#ffffff
+    style ENCLAVE fill:#111111,stroke:#ffffff,color:#ffffff
+    style MODULE fill:#000000,stroke:#ffffff,color:#ffffff
+    style SAFE fill:#111111,stroke:#ffffff,color:#ffffff
+    style PROTOCOLS fill:#000000,stroke:#ffffff,color:#ffffff
 ```
 
 ### The Decision Engine (AI Model)
@@ -70,15 +70,15 @@ flowchart TD
     CHECK -->|Safe| READ
     CHECK -->|At risk| EXIT[Emergency exit -<br/>return funds to vault]
 
-    style START fill:#f5f5f5,stroke:#333333
-    style READ fill:#ffffff,stroke:#333333
-    style EVALUATE fill:#ffffff,stroke:#333333
-    style DECIDE fill:#f5f5f5,stroke:#333333
-    style REBALANCE fill:#ffffff,stroke:#333333
-    style HOLD fill:#ffffff,stroke:#333333
-    style MONITOR fill:#ffffff,stroke:#333333
-    style CHECK fill:#f5f5f5,stroke:#333333
-    style EXIT fill:#ffffff,stroke:#333333
+    style START fill:#111111,stroke:#ffffff,color:#ffffff
+    style READ fill:#000000,stroke:#ffffff,color:#ffffff
+    style EVALUATE fill:#000000,stroke:#ffffff,color:#ffffff
+    style DECIDE fill:#111111,stroke:#ffffff,color:#ffffff
+    style REBALANCE fill:#000000,stroke:#ffffff,color:#ffffff
+    style HOLD fill:#000000,stroke:#ffffff,color:#ffffff
+    style MONITOR fill:#000000,stroke:#ffffff,color:#ffffff
+    style CHECK fill:#111111,stroke:#ffffff,color:#ffffff
+    style EXIT fill:#000000,stroke:#ffffff,color:#ffffff
 ```
 
 The agent's tools include:

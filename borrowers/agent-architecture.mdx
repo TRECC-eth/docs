@@ -20,10 +20,10 @@ graph LR
     LEASH -->|Approved calls only| HANDS[Hands<br/>Smart Wallet]
     HANDS -->|Interacts with| PROTOCOLS[Approved DeFi<br/>Protocols]
 
-    style BRAIN fill:#ffffff,stroke:#333333
-    style LEASH fill:#f5f5f5,stroke:#333333
-    style HANDS fill:#ffffff,stroke:#333333
-    style PROTOCOLS fill:#f5f5f5,stroke:#333333
+    style BRAIN fill:#000000,stroke:#ffffff,color:#ffffff
+    style LEASH fill:#111111,stroke:#ffffff,color:#ffffff
+    style HANDS fill:#000000,stroke:#ffffff,color:#ffffff
+    style PROTOCOLS fill:#111111,stroke:#ffffff,color:#ffffff
 ```
 
 ### The Brain - Decision Engine
@@ -49,12 +49,12 @@ flowchart LR
     CHECK2 -->|No| BLOCK2[Rejected]
     CHECK2 -->|Yes| EXEC[Transaction executes]
 
-    style TX fill:#ffffff,stroke:#333333
-    style CHECK1 fill:#f5f5f5,stroke:#333333
-    style CHECK2 fill:#f5f5f5,stroke:#333333
-    style BLOCK1 fill:#ffffff,stroke:#333333
-    style BLOCK2 fill:#ffffff,stroke:#333333
-    style EXEC fill:#ffffff,stroke:#333333
+    style TX fill:#000000,stroke:#ffffff,color:#ffffff
+    style CHECK1 fill:#111111,stroke:#ffffff,color:#ffffff
+    style CHECK2 fill:#111111,stroke:#ffffff,color:#ffffff
+    style BLOCK1 fill:#000000,stroke:#ffffff,color:#ffffff
+    style BLOCK2 fill:#000000,stroke:#ffffff,color:#ffffff
+    style EXEC fill:#000000,stroke:#ffffff,color:#ffffff
 ```
 
 The Leash cannot be removed, upgraded, or bypassed. It is baked into the wallet's architecture at deployment time.
