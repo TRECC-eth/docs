@@ -48,6 +48,13 @@
             ]
           },
           {
+            "group": "Legal",
+            "pages": [
+              "legal/terms-of-use",
+              "legal/privacy-policy"
+            ]
+          },
+          {
             "group": "Resources",
             "pages": [
               "resources/glossary",
