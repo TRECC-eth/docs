@@ -14,6 +14,129 @@ These tools are not all the same type of relationship. Some are infrastructure p
   We use the term **ecosystem integrations** instead of **partners** unless there is a formal partnership. This keeps the documentation accurate while still showing the external systems TRECC is built with.
 </Note>
 
+<div className="ecosystem-map" aria-label="TRECC ecosystem integration diagram">
+  <svg className="ecosystem-lines" viewBox="0 0 960 520" role="img" aria-hidden="true">
+    <defs>
+      <linearGradient id="trecc-line" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="rgba(255,255,255,0.18)" />
+        <stop offset="50%" stopColor="rgba(255,255,255,0.7)" />
+        <stop offset="100%" stopColor="rgba(255,255,255,0.18)" />
+      </linearGradient>
+    </defs>
+    <g stroke="url(#trecc-line)">
+      <path d="M480 250 C390 150 300 100 190 100" />
+      <path d="M480 250 C510 145 590 90 690 86" />
+      <path d="M480 250 C360 220 270 230 150 250" />
+      <path d="M480 250 C600 215 720 220 835 250" />
+      <path d="M480 250 C370 330 320 420 210 430" />
+      <path d="M480 250 C480 350 480 395 480 445" />
+      <path d="M480 250 C605 330 670 415 790 430" />
+    </g>
+  </svg>
+
+  <div className="ecosystem-node ecosystem-node-core">
+    <span className="ecosystem-logo ecosystem-logo-trecc" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <path d="M10 12h20M20 12v17M13 29h14" />
+      </svg>
+    </span>
+    <div>
+      <strong>TRECC</strong>
+      <span>Protocol coordination</span>
+    </div>
+  </div>
+
+  <div className="ecosystem-node ecosystem-node-safe">
+    <span className="ecosystem-logo ecosystem-logo-safe" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <rect x="9" y="12" width="22" height="16" rx="5" />
+        <path d="M14 17h12M14 23h12M28 18.5h3M28 21.5h3" />
+      </svg>
+    </span>
+    <div>
+      <strong>Safe</strong>
+      <span>Smart wallets</span>
+    </div>
+  </div>
+
+  <div className="ecosystem-node ecosystem-node-turnkey">
+    <span className="ecosystem-logo ecosystem-logo-turnkey" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <circle cx="14" cy="20" r="5" />
+        <path d="M19 20h12M26 20v5M31 20v4" />
+      </svg>
+    </span>
+    <div>
+      <strong>Turnkey</strong>
+      <span>Agent signing</span>
+    </div>
+  </div>
+
+  <div className="ecosystem-node ecosystem-node-chainlink">
+    <span className="ecosystem-logo ecosystem-logo-chainlink" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <path d="M20 8l10 6v12l-10 6-10-6V14z" />
+      </svg>
+    </span>
+    <div>
+      <strong>Chainlink</strong>
+      <span>Oracle data</span>
+    </div>
+  </div>
+
+  <div className="ecosystem-node ecosystem-node-starknet">
+    <span className="ecosystem-logo ecosystem-logo-starknet" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <path d="M20 7l3.5 9.5L33 20l-9.5 3.5L20 33l-3.5-9.5L7 20l9.5-3.5z" />
+        <path d="M13 13l14 14" />
+      </svg>
+    </span>
+    <div>
+      <strong>Starknet</strong>
+      <span>STARK proofs</span>
+    </div>
+  </div>
+
+  <div className="ecosystem-node ecosystem-node-aave">
+    <span className="ecosystem-logo ecosystem-logo-aave" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <path d="M13 28l7-17 7 17M16 22h8" />
+        <path d="M12 15c-2 1.5-3 3.3-3 5.5M28 15c2 1.5 3 3.3 3 5.5" />
+      </svg>
+    </span>
+    <div>
+      <strong>Aave V3</strong>
+      <span>Lending markets</span>
+    </div>
+  </div>
+
+  <div className="ecosystem-node ecosystem-node-compound">
+    <span className="ecosystem-logo ecosystem-logo-compound" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <path d="M27 13a10 10 0 1 0 0 14" />
+        <path d="M13 14l13 6-13 6M13 20h13" />
+      </svg>
+    </span>
+    <div>
+      <strong>Compound V3</strong>
+      <span>Credit markets</span>
+    </div>
+  </div>
+
+  <div className="ecosystem-node ecosystem-node-morpho">
+    <span className="ecosystem-logo ecosystem-logo-morpho" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <path d="M8 27c7-16 17-16 24 0" />
+        <path d="M12 27c4-8 12-8 16 0M16 27c2-3 6-3 8 0" />
+      </svg>
+    </span>
+    <div>
+      <strong>Morpho Blue</strong>
+      <span>Isolated markets</span>
+    </div>
+  </div>
+</div>
+
 ## Infrastructure integrations
 
 | Integration | Role in TRECC |
@@ -36,22 +159,6 @@ TRECC agents currently deploy lending strategies through whitelisted adapters fo
 | **Morpho** | Blue | Lending market integration for isolated and optimised lending markets. |
 
 Agents do not interact with these protocols directly. Every call routes through approved adapters and the Execution Module.
-
-```mermaid
-graph LR
-    AGENT[AI Agent] --> EM[Execution Module]
-    EM --> WL[Adapter Whitelist]
-    WL --> AAVE[Aave V3]
-    WL --> COMP[Compound V3]
-    WL --> MORPHO[Morpho Blue]
-
-    style AGENT fill:#000000,stroke:#ffffff,color:#ffffff
-    style EM fill:#111111,stroke:#ffffff,color:#ffffff
-    style WL fill:#000000,stroke:#ffffff,color:#ffffff
-    style AAVE fill:#111111,stroke:#ffffff,color:#ffffff
-    style COMP fill:#111111,stroke:#ffffff,color:#ffffff
-    style MORPHO fill:#111111,stroke:#ffffff,color:#ffffff
-```
 
 ## Why this matters
 
