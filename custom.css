@@ -24,6 +24,7 @@ nav[aria-label="Sidebar"] {
 .ecosystem-node {
   display: grid;
   justify-items: center;
+  grid-template-rows: 4.5rem auto auto;
   gap: 0.45rem;
   min-height: 9rem;
   padding: 1.1rem 0.85rem 1rem;
@@ -58,8 +59,8 @@ nav[aria-label="Sidebar"] {
 .ecosystem-logo {
   display: grid;
   place-items: center;
-  width: 3.25rem;
-  height: 3.25rem;
+  width: 4.5rem;
+  height: 4.5rem;
   margin-bottom: 0.35rem;
   border: none;
   border-radius: 999px;
@@ -75,15 +76,44 @@ nav[aria-label="Sidebar"] {
 
 .ecosystem-logo img {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 3.35rem;
+  height: 3.35rem;
   object-fit: contain;
 }
 
-.ecosystem-logo-turnkey img,
+.ecosystem-logo-safe img {
+  width: 3.25rem;
+  height: 3.25rem;
+}
+
+.ecosystem-logo-turnkey img {
+  width: 3rem;
+  height: 3rem;
+}
+
 .ecosystem-logo-chainlink img {
-  width: 78%;
-  height: 78%;
+  width: 3.55rem;
+  height: 3.55rem;
+}
+
+.ecosystem-logo-starknet img {
+  width: 3.65rem;
+  height: 3.65rem;
+}
+
+.ecosystem-logo-aave img {
+  width: 3.35rem;
+  height: 3.35rem;
+}
+
+.ecosystem-logo-compound img {
+  width: 3.15rem;
+  height: 3.15rem;
+}
+
+.ecosystem-logo-morpho img {
+  width: 3.25rem;
+  height: 3.25rem;
 }
 
 @media (max-width: 980px) {
