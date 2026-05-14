@@ -92,8 +92,8 @@ nav[aria-label="Sidebar"] {
 }
 
 .ecosystem-logo-chainlink img {
-  width: 3.55rem;
-  height: 3.55rem;
+  width: 4rem;
+  height: 4rem;
 }
 
 .ecosystem-logo-starknet img {
@@ -104,6 +104,7 @@ nav[aria-label="Sidebar"] {
 .ecosystem-logo-aave img {
   width: 3.35rem;
   height: 3.35rem;
+  transform: translateY(0.35rem);
 }
 
 .ecosystem-logo-compound img {
