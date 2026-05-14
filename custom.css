@@ -34,14 +34,15 @@ nav[aria-label="Sidebar"] {
   text-align: center;
 }
 
-.ecosystem-node strong,
+.ecosystem-name,
 .ecosystem-node span {
   display: block;
 }
 
-.ecosystem-node strong {
+.ecosystem-name {
   color: rgba(255, 255, 255, 0.96);
-  font-size: 0.88rem;
+  font-size: 0.95rem;
+  font-weight: 600;
   line-height: 1.2;
   letter-spacing: 0;
 }
