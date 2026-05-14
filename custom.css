@@ -13,41 +13,20 @@ nav[aria-label="Sidebar"] {
   min-width: 18rem !important;
 }
 
-/* Ecosystem integration diagram */
-.ecosystem-map {
-  position: relative;
-  min-height: 34rem;
+/* Ecosystem integration grid */
+.ecosystem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
   margin: 2rem 0 2.5rem;
-  overflow: hidden;
-  border-radius: 0.5rem;
-  background: transparent;
-}
-
-.ecosystem-lines {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.ecosystem-lines path {
-  fill: none;
-  stroke-width: 1.25;
-  stroke-linecap: round;
-  stroke-dasharray: 6 10;
-  opacity: 0.45;
 }
 
 .ecosystem-node {
-  position: absolute;
   display: grid;
   justify-items: center;
-  align-content: start;
-  align-items: center;
   gap: 0.45rem;
-  width: 8.75rem;
-  min-height: 8.75rem;
-  padding: 1rem 0.8rem 0.9rem;
+  min-height: 9rem;
+  padding: 1.1rem 0.85rem 1rem;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 0.5rem;
   background: rgba(0, 0, 0, 0.88);
@@ -78,18 +57,13 @@ nav[aria-label="Sidebar"] {
 .ecosystem-logo {
   display: grid;
   place-items: center;
-  width: 3.1rem;
-  height: 3.1rem;
-  margin-bottom: 0.25rem;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: 0.35rem;
   border: none;
   border-radius: 999px;
   background: transparent;
   box-shadow: none;
-}
-
-.ecosystem-logo-trecc {
-  width: 3.6rem;
-  height: 3.6rem;
 }
 
 .ecosystem-logo-safe,
@@ -105,114 +79,21 @@ nav[aria-label="Sidebar"] {
   object-fit: contain;
 }
 
-.ecosystem-logo-trecc img {
-  width: 88%;
-  height: 88%;
-}
-
 .ecosystem-logo-turnkey img,
 .ecosystem-logo-chainlink img {
   width: 78%;
   height: 78%;
 }
 
-.ecosystem-node-core {
-  top: 50%;
-  left: 50%;
-  z-index: 2;
-  width: 9.5rem;
-  min-height: 9.25rem;
-  transform: translate(-50%, -50%);
-  border-color: rgba(255, 255, 255, 0.32);
-}
-
-.ecosystem-node-safe {
-  top: 1.75rem;
-  left: 7%;
-}
-
-.ecosystem-node-turnkey {
-  top: 1.75rem;
-  right: 7%;
-}
-
-.ecosystem-node-chainlink {
-  top: 12.4rem;
-  left: 3%;
-}
-
-.ecosystem-node-starknet {
-  top: 12.4rem;
-  right: 3%;
-}
-
-.ecosystem-node-aave {
-  bottom: 1.5rem;
-  left: 8%;
-}
-
-.ecosystem-node-compound {
-  bottom: 0.6rem;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.ecosystem-node-morpho {
-  right: 8%;
-  bottom: 1.5rem;
-}
-
 @media (max-width: 980px) {
-  .ecosystem-map {
-    min-height: 39rem;
-  }
-
-  .ecosystem-node-safe,
-  .ecosystem-node-chainlink,
-  .ecosystem-node-aave {
-    left: 0;
-  }
-
-  .ecosystem-node-turnkey,
-  .ecosystem-node-starknet,
-  .ecosystem-node-morpho {
-    right: 0;
-  }
-
-  .ecosystem-node-aave,
-  .ecosystem-node-morpho {
-    bottom: 5rem;
+  .ecosystem-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 760px) {
-  .ecosystem-map {
-    display: grid;
+  .ecosystem-grid {
+    grid-template-columns: 1fr;
     gap: 0.75rem;
-    min-height: 0;
-    padding: 1rem;
-  }
-
-  .ecosystem-lines {
-    display: none;
-  }
-
-.ecosystem-node,
-.ecosystem-node-core,
-.ecosystem-node-safe,
-.ecosystem-node-turnkey,
-.ecosystem-node-chainlink,
-.ecosystem-node-starknet,
-.ecosystem-node-aave,
-.ecosystem-node-compound,
-.ecosystem-node-morpho {
-  position: static;
-  width: 100%;
-  min-height: 8rem;
-  transform: none;
-}
-
-  .ecosystem-node-core {
-    order: -1;
   }
 }
