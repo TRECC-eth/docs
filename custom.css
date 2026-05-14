@@ -16,14 +16,11 @@ nav[aria-label="Sidebar"] {
 /* Ecosystem integration diagram */
 .ecosystem-map {
   position: relative;
-  min-height: 37rem;
+  min-height: 34rem;
   margin: 2rem 0 2.5rem;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 0.75rem;
-  background:
-    radial-gradient(circle at 50% 48%, rgba(255, 255, 255, 0.14), transparent 18rem),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  border-radius: 0.5rem;
+  background: transparent;
 }
 
 .ecosystem-lines {
@@ -35,23 +32,27 @@ nav[aria-label="Sidebar"] {
 
 .ecosystem-lines path {
   fill: none;
-  stroke-width: 2;
+  stroke-width: 1.25;
   stroke-linecap: round;
-  stroke-dasharray: 8 10;
+  stroke-dasharray: 6 10;
+  opacity: 0.45;
 }
 
 .ecosystem-node {
   position: absolute;
-  display: flex;
+  display: grid;
+  justify-items: center;
+  align-content: start;
   align-items: center;
-  gap: 0.95rem;
-  width: 14.75rem;
-  min-height: 5rem;
-  padding: 0.95rem 1rem;
+  gap: 0.45rem;
+  width: 8.75rem;
+  min-height: 8.75rem;
+  padding: 1rem 0.8rem 0.9rem;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 0.5rem;
-  background: rgba(0, 0, 0, 0.76);
-  box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.22);
+  background: rgba(0, 0, 0, 0.88);
+  box-shadow: none;
+  text-align: center;
 }
 
 .ecosystem-node strong,
@@ -61,15 +62,15 @@ nav[aria-label="Sidebar"] {
 
 .ecosystem-node strong {
   color: rgba(255, 255, 255, 0.96);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   line-height: 1.2;
   letter-spacing: 0;
 }
 
 .ecosystem-node div > span {
-  margin-top: 0.2rem;
-  color: rgba(255, 255, 255, 0.64);
-  font-size: 0.78rem;
+  margin-top: 0.25rem;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.72rem;
   line-height: 1.25;
   letter-spacing: 0;
 }
@@ -77,21 +78,18 @@ nav[aria-label="Sidebar"] {
 .ecosystem-logo {
   display: grid;
   place-items: center;
-  flex: 0 0 3rem;
-  width: 3rem;
-  height: 3rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 3.1rem;
+  height: 3.1rem;
+  margin-bottom: 0.25rem;
+  border: none;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  box-shadow: inset 0 0 1.5rem rgba(255, 255, 255, 0.05);
+  background: transparent;
+  box-shadow: none;
 }
 
 .ecosystem-logo-trecc {
-  flex-basis: 3.6rem;
   width: 3.6rem;
   height: 3.6rem;
-  border-color: rgba(255, 255, 255, 0.7);
-  background: rgba(0, 0, 0, 0.34);
 }
 
 .ecosystem-logo-safe,
@@ -102,8 +100,8 @@ nav[aria-label="Sidebar"] {
 
 .ecosystem-logo img {
   display: block;
-  width: 82%;
-  height: 82%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -122,68 +120,68 @@ nav[aria-label="Sidebar"] {
   top: 50%;
   left: 50%;
   z-index: 2;
-  width: 16.5rem;
-  min-height: 5.9rem;
+  width: 9.5rem;
+  min-height: 9.25rem;
   transform: translate(-50%, -50%);
   border-color: rgba(255, 255, 255, 0.32);
 }
 
 .ecosystem-node-safe {
-  top: 3.75rem;
-  left: 4rem;
+  top: 1.75rem;
+  left: 7%;
 }
 
 .ecosystem-node-turnkey {
-  top: 2.75rem;
-  right: 4rem;
+  top: 1.75rem;
+  right: 7%;
 }
 
 .ecosystem-node-chainlink {
-  top: 15rem;
-  left: 1.5rem;
+  top: 12.4rem;
+  left: 3%;
 }
 
 .ecosystem-node-starknet {
-  top: 15rem;
-  right: 1.5rem;
+  top: 12.4rem;
+  right: 3%;
 }
 
 .ecosystem-node-aave {
-  bottom: 3.75rem;
-  left: 2.5rem;
+  bottom: 1.5rem;
+  left: 8%;
 }
 
 .ecosystem-node-compound {
-  bottom: 1.5rem;
+  bottom: 0.6rem;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .ecosystem-node-morpho {
-  right: 2.5rem;
-  bottom: 3.75rem;
+  right: 8%;
+  bottom: 1.5rem;
 }
 
 @media (max-width: 980px) {
   .ecosystem-map {
-    min-height: 43rem;
+    min-height: 39rem;
   }
 
   .ecosystem-node-safe,
   .ecosystem-node-chainlink,
   .ecosystem-node-aave {
-    left: 1rem;
+    left: 0;
   }
 
   .ecosystem-node-turnkey,
   .ecosystem-node-starknet,
   .ecosystem-node-morpho {
-    right: 1rem;
+    right: 0;
   }
 
   .ecosystem-node-aave,
   .ecosystem-node-morpho {
-    bottom: 7rem;
+    bottom: 5rem;
   }
 }
 
@@ -199,20 +197,20 @@ nav[aria-label="Sidebar"] {
     display: none;
   }
 
-  .ecosystem-node,
-  .ecosystem-node-core,
-  .ecosystem-node-safe,
-  .ecosystem-node-turnkey,
-  .ecosystem-node-chainlink,
-  .ecosystem-node-starknet,
-  .ecosystem-node-aave,
-  .ecosystem-node-compound,
-  .ecosystem-node-morpho {
-    position: static;
-    width: 100%;
-    min-height: 4.25rem;
-    transform: none;
-  }
+.ecosystem-node,
+.ecosystem-node-core,
+.ecosystem-node-safe,
+.ecosystem-node-turnkey,
+.ecosystem-node-chainlink,
+.ecosystem-node-starknet,
+.ecosystem-node-aave,
+.ecosystem-node-compound,
+.ecosystem-node-morpho {
+  position: static;
+  width: 100%;
+  min-height: 8rem;
+  transform: none;
+}
 
   .ecosystem-node-core {
     order: -1;
