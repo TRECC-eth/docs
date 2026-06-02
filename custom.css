@@ -93,6 +93,11 @@ nav[aria-label="Sidebar"] {
   transform: translateY(0.1rem);
 }
 
+.ecosystem-logo-openserv img {
+  width: 3.35rem;
+  height: 3.35rem;
+}
+
 .ecosystem-logo-chainlink img {
   width: 4rem;
   height: 4rem;
