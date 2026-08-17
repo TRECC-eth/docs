@@ -6,7 +6,7 @@ icon: "plug"
 
 ## What are ecosystem integrations?
 
-TRECC connects to established third-party tools instead of rebuilding every part of the stack from scratch. These integrations provide wallet infrastructure, key management, oracle services, cryptographic proofs, and DeFi yield venues.
+TRECC connects to established third-party tools instead of rebuilding every part of the stack from scratch. These integrations provide wallet infrastructure, key management, oracle services, cryptographic proofs, privacy shielding, and DeFi yield venues.
 
 These tools are not all the same type of relationship. Some are infrastructure providers. Some are DeFi protocols. Some are cryptographic systems or networks that TRECC uses as part of its architecture.
 
@@ -45,6 +45,16 @@ These tools are not all the same type of relationship. Some are infrastructure p
     </div>
   </div>
 
+  <div className="ecosystem-node ecosystem-node-reclaim">
+    <span className="ecosystem-logo ecosystem-logo-reclaim" aria-hidden="true">
+      <img src="/images/reclaim.png" alt="" />
+    </span>
+    <div>
+      <div className="ecosystem-name">Reclaim Protocol</div>
+      <span>ZK data verification (KYC)</span>
+    </div>
+  </div>
+
   <div className="ecosystem-node ecosystem-node-chainlink">
     <span className="ecosystem-logo ecosystem-logo-chainlink" aria-hidden="true">
       <img src="/images/chainlink.png" alt="" />
@@ -61,7 +71,17 @@ These tools are not all the same type of relationship. Some are infrastructure p
     </span>
     <div>
       <div className="ecosystem-name">Starknet / STARKs</div>
-      <span>STARK proofs</span>
+      <span>Deterministic guardrails</span>
+    </div>
+  </div>
+  
+  <div className="ecosystem-node ecosystem-node-strk20">
+    <span className="ecosystem-logo ecosystem-logo-strk20" aria-hidden="true">
+      <img src="/images/strk20.png" alt="" />
+    </span>
+    <div>
+      <div className="ecosystem-name">STRK20</div>
+      <span>Agentic privacy & shielding</span>
     </div>
   </div>
 
@@ -103,10 +123,12 @@ These tools are not all the same type of relationship. Some are infrastructure p
 | **Safe (formerly Gnosis Safe)** | Smart wallet infrastructure for programmable account controls and secure transaction execution. |
 | **Turnkey** | Key management and signing infrastructure for agent-controlled wallets. |
 | **OpenServ** | Agent infrastructure used to support AI agent deployment and coordination. |
+| **Reclaim Protocol** | Zero-Knowledge (ZK) data verification used to generate off-chain proofs of user credentials, allowing TRECC to mint ERC-8004 "Verified Human" compliance badges without storing sensitive user data. |
 | **Chainlink** | Oracle and data infrastructure used for reliable on-chain inputs. |
-| **Starknet / STARKs** | Zero-knowledge proof infrastructure used for scalable and verifiable computation. |
+| **Starknet / STARKs** | Underlying cryptographic proof infrastructure utilized to intercept probabilistic AI intents and mathematically verify them against risk parameters (deterministic guardrails) before execution. |
+| **STRK20** | Starknet's privacy framework used to provision shielded treasury balances for AI agents, allowing them to execute private transfers and DeFi interactions without exposing on-chain footprints or trading logic to front-runners. |
 
-These integrations support the security and execution layers around AI agents. They help TRECC keep agent activity constrained, verifiable, and easier to monitor.
+These integrations support the security, compliance, and execution layers around AI agents. They help TRECC keep agent activity mathematically constrained, legally verified, completely private, and easier to monitor.
 
 ## Active lending protocols
 
@@ -126,12 +148,13 @@ Ecosystem integrations let TRECC focus on its core protocol design:
 
 - **Capital pooling** through the TRECC Vault
 - **Agent borrowing** through the Risk Engine
-- **Safe execution** through whitelisted adapters
+- **Safe execution** through mathematically verified STARK guardrails
+- **Identity compliance** through Reclaim ZK proofs
 - **Yield generation** through established lending markets
 - **Verification** through trusted infrastructure and cryptographic systems
 
 <Warning>
-  Integration with a protocol does not remove DeFi risk. Smart contract risk, oracle risk, liquidity risk, and market risk can still affect strategies. TRECC reduces this risk through whitelists, risk limits, collateral, and automated liquidation.
+  Integration with a protocol does not remove DeFi risk. Smart contract risk, oracle risk, liquidity risk, and market risk can still affect strategies. TRECC reduces this risk through strict STARK whitelists, risk limits, collateral, and automated liquidation.
 </Warning>
 
 ## How new integrations are added
