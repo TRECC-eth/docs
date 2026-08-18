@@ -1,0 +1,66 @@
+---
+title: "Deterministic Guardrails"
+description: "How TRECC mathematically secures AI execution without relying on probabilistic models."
+icon: "shield-check"
+---
+
+## The Hallucination Problem
+
+As the machine economy scales, AI agents are increasingly executing high-stakes financial transactions on-chain. However, Large Language Models (LLMs) are inherently probabilistic. They guess, they hallucinate, and they execute on stale context. 
+
+Giving a probabilistic model direct access to raw private keys or unconstrained capital introduces catastrophic risk. Traditional human-in-the-loop approvals (like a manual multisig click) solve this, but they are too slow for agents operating on 2-second block times.
+
+**TRECC’s core philosophy: We do not try to fix the AI model. We secure the execution layer.**
+
+Instead of trusting an AI not to hallucinate, TRECC intercepts the AI's financial intent and enforces **100% deterministic mathematical guardrails** before any capital ever moves.
+
+---
+
+## The Guardrail Pipeline
+
+When an AI agent (orchestrated via frameworks like Letta or OpenServ) decides to execute a trade, TRECC's infrastructure steps in. The process operates in milliseconds:
+
+### 1. Intent Interception
+The AI formulates a trading strategy and generates a transaction payload. Before this payload reaches the signing enclave, TRECC's backend intercepts the probabilistic intent.
+
+### 2. Constraint Validation
+The requested transaction is run through our proprietary Risk Engine. The engine evaluates the payload against strict mathematical parameters, including:
+* **Protocol Whitelists:** Is the target protocol (e.g., Aave, Compound) approved?
+* **Capital Limits:** Does the transaction size exceed the agent's staked safety bond or dynamic credit limit?
+* **Slippage & State Revalidation:** Does the current on-chain liquidity state match the AI's assumptions, or is it operating on stale authority?
+
+### 3. The Kill Switch
+If the AI hallucinates, attempts to interact with an unverified contract, or violates any risk parameter, the Guardrail Layer triggers an instant **Kill Switch**. The transaction is dropped off-chain, costing zero gas and preventing any capital loss.
+
+### 4. Machine-Speed Execution
+If the math checks out, the payload is securely passed to **Turnkey’s Trusted Execution Environments (TEEs)**, which programmatically sign the transaction in sub-100ms and route it to the agent's **Safe (Gnosis) Vault** for on-chain settlement.
+
+---
+
+## Verifiable Compute & Starknet STARKs
+
+To ensure institutional-grade security without compromising on speed or privacy, TRECC's guardrails are deeply integrated with **Starknet's cryptographic infrastructure**.
+
+We cannot process complex, multi-variable risk checks on the Ethereum mainnet—it is too slow and exposes proprietary trading logic to front-runners. Instead, TRECC utilizes **STARK (Scalable Transparent Arguments of Knowledge)** proofs.
+
+* **Off-Chain Processing:** TRECC calculates the risk parameters and validates the AI's intent off-chain.
+* **Cryptographic Proofs:** We generate a STARK proof that mathematically guarantees the transaction obeys all predefined guardrails and credit limits.
+* **On-Chain Verification:** The smart contract only needs to verify the tiny STARK proof. This turns the probabilistic guess of an AI into a deterministic, cryptographically proven action.
+
+By leveraging STARKs, we ensure that no transaction can be executed unless it mathematically proves its own safety.
+
+---
+
+## Agentic Shielding & Privacy (Roadmap)
+
+A critical component of TRECC's long-term guardrail system is the protection of trading logic. If an AI agent's constraints and parameters are fully public, MEV bots and competitors can easily reverse-engineer the agent's strategy or front-run its trades.
+
+To solve this, TRECC is actively building towards an integration with **Starknet's STRK20 framework** and Zero-Knowledge (ZK) execution environments. In our upcoming architectural iterations, this integration will enable:
+
+1. **Shielded Constraints:** The exact risk weights and proprietary constraints will remain entirely shielded from public view.
+2. **Privacy Pools:** The agent's treasury balances and transfer histories will be obscured via Starknet privacy pools.
+3. **Anonymous Compliance:** The underlying user backing the AI agent is verified (via Reclaim Protocol ZK proofs) but never doxed on a public ledger.
+
+<Note>
+  **Security over Obfuscation:** While our specific risk-weighting algorithms are kept proprietary to protect our users' alpha, the *enforcement* of these rules will be entirely verifiable through zero-knowledge cryptography. You do not have to trust our servers; you only have to trust the math.
+</Note>
