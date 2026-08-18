@@ -72,6 +72,7 @@ To ensure institutional-grade security without compromising on speed or privacy,
 We cannot process complex, multi-variable risk checks directly on the Ethereum mainnet. It is too expensive, too slow, and exposes proprietary trading constraints to front-runners. Instead, TRECC utilizes **STARK (Scalable Transparent Arguments of Knowledge)** proofs to scale safely.
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '22px', 'fontFamily': 'Inter'}, 'flowchart': {'nodeSpacing': 90, 'rankSpacing': 120, 'curve': 'basis'}}}%%
 flowchart LR
     subgraph Off_Chain [TRECC Off-Chain Environment]
         Intent[Probabilistic AI Intent] --> Risk[TRECC Risk Engine]
