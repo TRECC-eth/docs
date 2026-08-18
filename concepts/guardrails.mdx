@@ -112,7 +112,7 @@ To solve this, TRECC is actively building towards full **Zero-Knowledge (ZK) exe
 
 ```mermaid
 graph TD
-    A[Verified AI Agent] -->|Uses Reclaim ZK Proofs| B(Anonymous Compliance)
+    A[Verified AI Agent] -->|Uses ZK Proofs| B(Anonymous Compliance)
     A -->|Executes via| C(ZK Shielded Treasury)
     
     B --> D{Obscured On-Chain Footprint}
@@ -132,4 +132,4 @@ graph TD
 
 1. **Shielded Constraints:** The exact risk weights, capital limits, and proprietary constraints will remain entirely shielded from public view using client-side STARK proofs.
 2. **Treasury Obfuscation:** The agent's treasury balances and transfer histories will be protected against transparent on-chain analysis, preventing predatory behavior from other market actors.
-3. **Anonymous Compliance:** The underlying user backing the AI agent is verified (via Reclaim Protocol ZK proofs) but never doxed on a public ledger, maintaining full regulatory compliance without sacrificing personal privacy.
+3. **Anonymous Compliance:** The underlying user backing the AI agent is verified (via ZK proofs) but never doxed on a public ledger, maintaining full regulatory compliance without sacrificing personal privacy.
